@@ -8,19 +8,9 @@ VuFind, see https://vufind.org.
 Installation
 ============
 
-... via SSH
-~~~~~~~~~~~
-
 .. code-block:: bash
 
-   pip install -e git+ssh://git@github.com/herreio/vupysolr.git#egg=vupysolr
-
-... or via HTTPS
-~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-   pip install -e git+https://github.com/herreio/vupysolr.git#egg=vupysolr
+   pip install vupysolr
 
 Usage Examples
 ==============
