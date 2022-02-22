@@ -8,7 +8,7 @@ setuptools.setup(
     description="Access Solr stored VuFind records.",
     long_description=open("README.rst").read(),
     long_description_content_type="text/x-rst",
-    license=open("LICENSE").read(),
+    license="GPLv3",
     url="https://github.com/herreio/vupysolr",
     packages=["vupysolr"],
     install_requires=["pysolr", "pymarc", "python-dateutil", "requests"],
