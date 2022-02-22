@@ -18,7 +18,7 @@ def get_logger(name, loglevel=logging.WARNING):
 def json_req(url):
     logger = get_logger("vupysolr")
     try:
-        response = requests.get(url, headers={"User-Agent": "vupysolr 0.1.0"})
+        response = requests.get(url, headers={"User-Agent": "vupysolr 0.1.1"})
     except requests.exceptions.RequestException as err:
         logger.error(err.__class__.__name__)
         return None
