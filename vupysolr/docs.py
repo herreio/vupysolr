@@ -36,16 +36,19 @@ class VuFindParser:
 
     def _field_first(self, name):
         field_list = self._field(name)
-        if field_list and len(field_list) > 0:
+        if type(field_list) == list and len(field_list) > 0:
             return field_list[0]
 
     def _field_joined(self, name, delim="|"):
         field_list = self._field(name)
-        if field_list and len(field_list) > 0:
+        if type(field_list) == list and len(field_list) > 0:
             return delim.join(field_list)
 
     def get(self, name):
         return self._field(name)
+
+    def joined(self, name, delim="|"):
+        return self._field_joined(name, delim=delim)
 
     # static fields
 
@@ -101,7 +104,7 @@ class VuFindParser:
 
     @property
     def hierarchy_parent_id(self):
-        return self._field("hierarchy_top_id")
+        return self._field("hierarchy_parent_id")
 
     @property
     def id(self):
