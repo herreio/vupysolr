@@ -20,6 +20,7 @@ class VuFindIndex:
         self.url_core = "{0}/{1}".format(self.url, self.core)
         self.url_schema = "{0}/{1}".format(self.url_core, "schema")
         self.url_config = "{0}/{1}".format(self.url_core, "config")
+        self.url_status = "{0}/admin/cores?action=STATUS&core={1}&wt=json".format(self.url, self.core)
         self.client = pysolr.Solr(self.url_core)
         self.logger = get_logger("vupysolr", loglevel=loglevel)
 
@@ -91,6 +92,13 @@ class VuFindIndex:
         if response is not None:
             if "config" in response:
                 return response["config"]
+
+    def status(self):
+        response = json_req(self.url_status)
+        if response is not None:
+            if "status" in response:
+                if self.core in response["status"]:
+                    return response["status"][self.core]
 
     def set_loglevel(self, level):
         if self.logger.level != level:
