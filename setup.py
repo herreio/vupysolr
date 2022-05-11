@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="vupysolr",
-    version="0.1.3",
+    version="0.1.4",
     author="Donatus Herre",
     author_email="donatus.herre@slub-dresden.de",
     description="Access Solr stored VuFind records.",
