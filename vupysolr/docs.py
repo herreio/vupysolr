@@ -36,12 +36,12 @@ class VuFindParser:
 
     def _field_first(self, name):
         field_list = self._field(name)
-        if type(field_list) == list and len(field_list) > 0:
+        if isinstance(field_list, list) and len(field_list) > 0:
             return field_list[0]
 
     def _field_joined(self, name, delim="|"):
         field_list = self._field(name)
-        if type(field_list) == list and len(field_list) > 0:
+        if isinstance(field_list, list) and len(field_list) > 0:
             return delim.join(field_list)
 
     def get(self, name):
@@ -228,16 +228,19 @@ class VuFindMarcParser:
 
     @property
     def fields(self):
-        if self.fullrecord is not None and type(self.fullrecord) == dict:
+        if isinstance(self.fullrecord, dict):
             if "fields" in self.fullrecord:
                 return self.fullrecord["fields"]
 
+    def get_field(self, name):
+        if isinstance(self.fields, list):
+            for field in self.fields:
+                if name in field:
+                    return field[name]
+
     @property
     def latest_transaction(self):
-        if self.fields is not None:
-            for field in self.fields:
-                if "005" in field:
-                    return field["005"]
+        return self.get_field("005")
 
     @property
     def latest_transaction_datetime(self):
@@ -256,10 +259,9 @@ class VuFindMarcParser:
 
     @property
     def date_entered(self):
-        if self.fields is not None:
-            for field in self.fields:
-                if "008" in field:
-                    return field["008"][:6]
+        value = self.get_field("008")
+        if isinstance(value, str):
+            return value[:6]
 
     @property
     def date_entered_date(self):
