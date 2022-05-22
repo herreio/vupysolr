@@ -115,16 +115,32 @@ class VuFindParser:
         return self._field("fulltext")
 
     @property
-    def hierarchytype(self):
-        return self._field("hierarchytype")
+    def hierarchy_browse(self):
+        return self._field("hierarchy_browse")  # added 3.0
+
+    @property
+    def hierarchy_parent_id(self):
+        return self._field("hierarchy_parent_id")
+
+    @property
+    def hierarchy_parent_title(self):
+        return self._field("hierarchy_parent_title")
+
+    @property
+    def hierarchy_sequence(self):
+        return self._field("hierarchy_sequence")
 
     @property
     def hierarchy_top_id(self):
         return self._field("hierarchy_top_id")
 
     @property
-    def hierarchy_parent_id(self):
-        return self._field("hierarchy_parent_id")
+    def hierarchy_top_title(self):
+        return self._field("hierarchy_top_title")
+
+    @property
+    def hierarchytype(self):
+        return self._field("hierarchytype")
 
     @property
     def id(self):
@@ -137,6 +153,10 @@ class VuFindParser:
     @property
     def is_hierarchy_id(self):
         return self._field("is_hierarchy_id")
+
+    @property
+    def is_hierarchy_title(self):
+        return self._field("is_hierarchy_title")
 
     @property
     def isbn(self):
@@ -213,6 +233,10 @@ class VuFindParser:
         return self._field("title")
 
     @property
+    def title_in_hierarchy(self):
+        return self._field("title_in_hierarchy")
+
+    @property
     def title_short(self):
         return self._field("title_short")
 
@@ -235,8 +259,20 @@ class VuFindParser:
     # dynamic fields
 
     @property
+    def upc_str_mv(self):
+        return self._field("upc_str_mv")
+
+    @property
     def doi_str_mv(self):
-        return self._field("doi_str_mv")
+        return self._field("doi_str_mv")  # supported 3.0
+
+    @property
+    def uuid_str_mv(self):
+        return self._field("uuid_str_mv")  # supported 8.1
+
+    @property
+    def previous_id_str_mv(self):
+        return self._field("previous_id_str_mv")  # supported 8.1
 
     # marc fields
 
