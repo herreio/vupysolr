@@ -65,12 +65,28 @@ class VuFindParser:
         return self._field("building")
 
     @property
+    def collection(self):
+        return self._field("collection")
+
+    @property
     def container_title(self):
         return self._field("container_title")
 
     @property
+    def contents(self):
+        return self._field("contents")
+
+    @property
     def ctrlnum(self):
         return self._field("ctrlnum")
+
+    @property
+    def dateSpan(self):
+        return self._field("dateSpan")
+
+    @property
+    def description(self):
+        return self._field("description")
 
     @property
     def edition(self):
@@ -93,6 +109,10 @@ class VuFindParser:
     @property
     def fullrecord(self):
         return self._field("fullrecord")
+
+    @property
+    def fulltext(self):
+        return self._field("fulltext")
 
     @property
     def hierarchytype(self):
@@ -141,8 +161,20 @@ class VuFindParser:
             return dateutil.parser.isoparse(timestamp)
 
     @property
+    def lccn(self):
+        return self._field("lccn")
+
+    @property
     def marc_error(self):
         return self._field("marc_error")
+
+    @property
+    def oclc_num(self):
+        return self._field("oclc_num")
+
+    @property
+    def physical(self):
+        return self._field("physical")
 
     @property
     def publish_date(self):
@@ -157,12 +189,24 @@ class VuFindParser:
         return self._field("publisher")
 
     @property
+    def publisherStr(self):
+        return self._field("publisherStr")
+
+    @property
     def record_format(self):
         return self._field("record_format")
 
     @property
     def recordtype(self):
         return self._field("recordtype")    # depracted 6.0 / removed 7.0
+
+    @property
+    def series(self):
+        return self._field("series")
+
+    @property
+    def series2(self):
+        return self._field("series2")
 
     @property
     def title(self):
@@ -175,6 +219,14 @@ class VuFindParser:
     @property
     def thumbnail(self):
         return self._field("thumbnail")
+
+    @property
+    def topic(self):
+        return self._field("topic")
+
+    @property
+    def topic_facet(self):
+        return self._field("topic_facet")
 
     @property
     def url(self):
