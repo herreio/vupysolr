@@ -326,6 +326,15 @@ class VuFindMarcParser:
                 if name in field:
                     return field[name]
 
+    def get_fields(self, name):
+        if isinstance(self.fields, list):
+            fields = []
+            for field in self.fields:
+                if name in field:
+                    fields.append[field[name]]
+            if len(fields) > 0:
+                return fields
+
     @property
     def latest_transaction(self):
         return self.get_field("005")
