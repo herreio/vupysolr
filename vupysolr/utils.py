@@ -4,6 +4,7 @@ import requests
 
 from . import __version__
 
+
 def get_logger(name, loglevel=logging.WARNING):
     logger = logging.getLogger(name)
     if not logger.handlers:
