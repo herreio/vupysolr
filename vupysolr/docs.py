@@ -443,7 +443,7 @@ class SolrStatusParser(Parser):
     def num_docs(self):
         index = self._index
         if isinstance(index, dict) and "numDocs" in index:
-            return index["numDoc"]
+            return index["numDocs"]
 
     @property
     def max_doc(self):
