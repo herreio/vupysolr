@@ -1,5 +1,5 @@
 """
-Parse Solr stored VuFind records.
+Parse Solr stored VuFind records as well as the core’s config, schema and status.
 
 For the Solr schema used by VuFind, see
 https://vufind.org/wiki/development:architecture:solr_index_schema
@@ -14,14 +14,11 @@ import dateutil.parser
 DT005 = "%Y%m%d%H%M%S.0"
 
 
-class VuFindParser:
+class Parser:
 
-    def __init__(self, doc, marc=False):
+    def __init__(self, doc):
         self.raw = doc
         self.fields = self._names()
-        self.marc = None
-        if marc:
-            self.marc = VuFindMarcParser(doc)
 
     def _names(self):
         if self.raw:
@@ -49,6 +46,15 @@ class VuFindParser:
 
     def joined(self, name, delim="|"):
         return self._field_joined(name, delim=delim)
+
+
+class VuFindParser(Parser):
+
+    def __init__(self, doc, marc=False):
+        super().__init__(doc)
+        self.marc = None
+        if marc:
+            self.marc = VuFindMarcParser(doc)
 
     # static fields
 
@@ -374,3 +380,97 @@ class VuFindMarcParser:
         date_entered_date = self.date_entered_date
         if date_entered_date is not None:
             return date_entered_date.isoformat()
+
+
+class SolrConfigParser(Parser):
+
+    def __init__(self, doc):
+        super().__init__(doc)
+
+
+class SolrSchemaParser(Parser):
+
+    def __init__(self, doc):
+        super().__init__(doc)
+
+
+class SolrStatusParser(Parser):
+
+    def __init__(self, doc):
+        super().__init__(doc)
+
+    @property
+    def core(self):
+        return self._field("name")
+
+    @property
+    def start_time(self):
+        return self._field("startTime")
+
+    @property
+    def start_time_datetime(self):
+        timestamp = self.start_time
+        if timestamp:
+            return dateutil.parser.isoparse(timestamp)
+
+    @property
+    def uptime(self):
+        return self._field("uptime")
+
+    @property
+    def _index(self):
+        return self._field("index")
+
+    @property
+    def num_docs(self):
+        index = self._index
+        if isinstance(index, dict) and "numDocs" in index:
+            return index["numDoc"]
+
+    @property
+    def max_doc(self):
+        index = self._index
+        if isinstance(index, dict) and "maxDoc" in index:
+            return index["maxDoc"]
+
+    @property
+    def deleted_docs(self):
+        index = self._index
+        if isinstance(index, dict) and "deletedDocs" in index:
+            return index["deletedDocs"]
+
+    @property
+    def version(self):
+        index = self._index
+        if isinstance(index, dict) and "version" in index:
+            return index["version"]
+
+    @property
+    def has_deletions(self):
+        index = self._index
+        if isinstance(index, dict) and "hasDeletions" in index:
+            return index["hasDeletions"]
+
+    @property
+    def last_modified(self):
+        index = self._index
+        if isinstance(index, dict) and "lastModified" in index:
+            return index["lastModified"]
+
+    @property
+    def last_modified_datetime(self):
+        timestamp = self.last_modified
+        if timestamp:
+            return dateutil.parser.isoparse(timestamp)
+
+    @property
+    def size(self):
+        index = self._index
+        if isinstance(index, dict) and "size" in index:
+            return index["size"]
+
+    @property
+    def size_in_bytes(self):
+        index = self._index
+        if isinstance(index, dict) and "sizeInBytes" in index:
+            return index["sizeInBytes"]

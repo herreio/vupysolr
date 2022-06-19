@@ -6,7 +6,7 @@ import pysolr
 import pymarc
 import logging
 
-from .docs import VuFindParser
+from .docs import VuFindParser, SolrConfigParser, SolrSchemaParser, SolrStatusParser
 from .utils import get_logger, json_req
 
 
@@ -83,22 +83,22 @@ class VuFindIndex:
 
     def schema(self):
         response = json_req(self.url_schema)
-        if response is not None:
+        if isinstance(response, dict):
             if "schema" in response:
-                return response["schema"]
+                return SolrSchemaParser(response["schema"])
 
     def config(self):
         response = json_req(self.url_config)
-        if response is not None:
+        if isinstance(response, dict):
             if "config" in response:
-                return response["config"]
+                return SolrConfigParser(response["config"])
 
     def status(self):
         response = json_req(self.url_status)
-        if response is not None:
+        if isinstance(response, dict):
             if "status" in response:
                 if self.core in response["status"]:
-                    return response["status"][self.core]
+                    return SolrStatusParser(response["status"][self.core])
 
     def set_loglevel(self, level):
         if self.logger.level != level:
