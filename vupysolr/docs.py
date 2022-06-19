@@ -283,6 +283,16 @@ class VuFindParser(Parser):
     # marc fields
 
     @property
+    def marc_control_number(self):
+        if self.marc is not None:
+            return self.marc.control_number
+
+    @property
+    def marc_control_number_identifier(self):
+        if self.marc is not None:
+            return self.marc.control_number_identifier
+
+    @property
     def marc_latest_transaction(self):
         if self.marc is not None:
             return self.marc.latest_transaction
@@ -340,6 +350,14 @@ class VuFindMarcParser:
                     fields.append[field[name]]
             if len(fields) > 0:
                 return fields
+
+    @property
+    def control_number(self):
+        return self.get_field("001")
+
+    @property
+    def control_number_identifier(self):
+        return self.get_field("003")
 
     @property
     def latest_transaction(self):
