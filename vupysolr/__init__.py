@@ -6,7 +6,7 @@ https://vufind.org
 """
 
 __author__ = "Donatus Herre <donatus.herre@slub-dresden.de>"
-__version__ = "0.1.7"
+__version__ = "0.2.0"
 
 from .docs import VuFindParser
 from .base import VuFindIndex, VuFindCluster

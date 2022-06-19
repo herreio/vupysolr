@@ -1,3 +1,9 @@
+0.2.0 [2022-06-19]
+- add generic class Parser
+- add parser classes SolrConfigParser, SolrSchemaParser, SolrStatusParser
+- parse return values of VuFindIndex methods config, schema and status
+- add methods to VuFindMarcParser
+
 0.1.7 [2022-05-26]
 - add method to VuFindMarcParser
 
