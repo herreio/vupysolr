@@ -108,7 +108,9 @@ class VuFindIndex:
                 handler.setLevel(level)
 
     def decode_marc(self, document):
-        if "fullrecord" in document:
+        if "fullrecord" in document and (
+            "recordtype" in document and "marc" in document["recordtype"] or
+            "record_format" in document and "marc" in document["record_format"]):
             marcdata = document["fullrecord"].encode("utf-8")
             try:
                 document["fullrecord"] = pymarc.Record(data=marcdata).as_dict()

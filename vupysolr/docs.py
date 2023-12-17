@@ -53,7 +53,8 @@ class VuFindParser(Parser):
     def __init__(self, doc, marc=False):
         super().__init__(doc)
         self.marc = None
-        if marc:
+        if marc and (self.recordtype and "marc" in self.recordtype or
+                     self.record_format and "marc" in self.record_format):
             self.marc = VuFindMarcParser(doc)
 
     # static fields
